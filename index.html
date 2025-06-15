@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" class="logo">
+    </div>
+    <div class="nav-right">
+      <button>⬇</button>
+      <button>🔍</button>
+    </div>
+  </header>
+
+  <nav class="bottom-nav">
+    <button>🏠<br>Beranda</button>
+    <button>🎮<br>Game</button>
+    <button>🆕<br>Baru & Populer</button>
+    <button>👤<br>Netflix Saya</button>
+  </nav>
+
+  <main>
+    <h2>Rekomendasi Film</h2>
+    <div class="movie-container">
+      <div class="movie">
+        <img src="https://picsum.photos/id/237/200/300" alt="Film 1">
+        <h3>Spider-Man</h3>
+        <p>Rp 40.000</p>
+        <button onclick="openOrderForm('Spider-Man', 'Rp 40.000')">Pesan Film</button>
+      </div>
+      <div class="movie">
+        <img src="https://picsum.photos/id/238/200/300" alt="Film 2">
+        <h3>Avengers</h3>
+        <p>Rp 45.000</p>
+        <button onclick="openOrderForm('Avengers', 'Rp 45.000')">Pesan Film</button>
+      </div>
+      <div class="movie">
+        <img src="https://picsum.photos/id/239/200/300" alt="Film 3">
+        <h3>Batman</h3>
+        <p>Rp 35.000</p>
+        <button onclick="openOrderForm('Batman', 'Rp 35.000')">Pesan Film</button>
+      </div>
+      <div class="movie">
+        <img src="https://picsum.photos/id/240/200/300" alt="Film 4">
+        <h3>Doctor Strange</h3>
+        <p>Rp 50.000</p>
+        <button onclick="openOrderForm('Doctor Strange', 'Rp 50.000')">Pesan Film</button>
+      </div>
+      <div class="movie">
+        <img src="https://picsum.photos/id/241/200/300" alt="Film 5">
+        <h3>Iron Man</h3>
+        <p>Rp 42.000</p>
+        <button onclick="openOrderForm('Iron Man', 'Rp 42.000')">Pesan Film</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Form Pesan -->
+  <div class="order-form" id="orderForm">
+    <h2>Form Pemesanan</h2>
+    <form onsubmit="submitOrder(event)">
+      <label>Nama Customer:</label>
+      <input type="text" id="nama" required>
+
+      <label>Judul Film:</label>
+      <input type="text" id="judul" readonly>
+
+      <label>Harga:</label>
+      <input type="text" id="harga" readonly>
+
+      <label>Pilih Jam Tayang:</label>
+      <select id="jam">
+        <option value="">-- Pilih Jam --</option>
+        <option>10:00</option>
+        <option>13:00</option>
+        <option>16:00</option>
+        <option>19:00</option>
+      </select>
+
+      <button type="submit">Pesan</button>
+      <button type="button" onclick="closeOrderForm()">Batal</button>
+    </form>
+    <p id="pesanStatus"></p>
+  </div>
+
+  <script>
+    function openOrderForm(judul, harga) {
+      document.getElementById('judul').value = judul;
+      document.getElementById('harga').value = harga;
+      document.getElementById('orderForm').style.display = 'block';
+      document.getElementById('pesanStatus').innerText = '';
+    }
+
+    function closeOrderForm() {
+      document.getElementById('orderForm').style.display = 'none';
+      document.getElementById('nama').value = '';
+      document.getElementById('jam').value = '';
+    }
+
+    function submitOrder(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById('nama').value.trim();
+      const judul = document.getElementById('judul').value.trim();
+      const harga = document.getElementById('harga').value.trim();
+      const jam = document.getElementById('jam').value;
+
+      if (!nama || !judul || !harga || !jam) {
+        document.getElementById('pesanStatus').innerText = '⚠️ Semua data harus diisi.';
+        return;
+      }
+
+      document.getElementById('pesanStatus').innerText = '✅ Pesanan sedang diproses...';
+
+      setTimeout(() => {
+        alert(`Terima kasih, ${nama}! Tiket untuk "${judul}" jam ${jam} telah dipesan.`);
+        closeOrderForm();
+      }, 2000);
+    }
+  </script>
+  <script src="data.js"></script>
+
+</body>
+</html>
