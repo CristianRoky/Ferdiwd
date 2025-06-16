@@ -25,7 +25,7 @@ header.navbar {
 .nav-right button {
   background: none;
   border: none;
-  color: white;
+  color: rgb(114, 23, 23);
   font-size: 18px;
   margin-left: 15px;
   cursor: pointer;
